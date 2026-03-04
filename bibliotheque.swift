@@ -1,3 +1,8 @@
+////////////////////////////////////////////////////
+//////////////////// KARI IHAB ////////////////////
+//////////////////////////////////////////////////
+
+
 import Foundation
 
 struct Livre {
@@ -105,7 +110,6 @@ struct Bibliotheque {
 
 
 
-
     func listerLivresDisponibles() {
         print("Livres disponibles :")
         for (_, livre) in livres where livre.disponible {
@@ -114,18 +118,21 @@ struct Bibliotheque {
     }
 
 
-
+    
+    //show list of books emprenter par les users
     func listerLivresEmpruntes(utilisateurId: String) {
+        //guard pour verifier que user existe
         guard let user = utilisateurs[utilisateurId] else {
             print("Erreur : utilisateur introuvable (ID \(utilisateurId)).")
             return
         }
-
+        
         print("Livres empruntés par \(user.nom) :")
         if user.livresEmpruntes.isEmpty {
             print("Aucun livre emprunté.")
             return
         }
+
 
         for isbn in user.livresEmpruntes {
             if let livre = livres[isbn] {
@@ -137,6 +144,7 @@ struct Bibliotheque {
     }
 }
 
+//helper to read user input
 func lire(_ message: String) -> String {
     print(message, terminator: "")
     return readLine() ?? ""
@@ -147,7 +155,7 @@ var biblio = Bibliotheque()
 
 
 
-
+//adding some books & Users
 biblio.ajoutLivre(livre: Livre(
     titre: "Catalogue Mercedes 230 CE / 280 CE W123",
     auteur: "Mercedes-Benz",
@@ -177,6 +185,8 @@ biblio.enregistrerUtilisateur(utilisateur: Utilisateur(nom: "Pape", id: "U002"))
 
 
 
+
+//mon console menu 
 while true {
     print("""
     \n========== CinqoCars ==========
@@ -190,7 +200,9 @@ while true {
     """)
 
     let choix = lire("Votre choix: ")
+    
 
+    //les cases pour chaque choix de l'utilisateur
     switch choix {
     case "1":
         let titre = lire("Titre: ")
